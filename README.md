@@ -1,246 +1,106 @@
-# Collective Knowledge Framework (CK)
+[![PyPI version](https://badge.fury.io/py/cmind.svg)](https://pepy.tech/project/cmind)
+[![Python Version](https://img.shields.io/badge/python-3+-blue.svg)](https://github.com/mlcommons/ck/tree/master/cm/cmind)
+[![License](https://img.shields.io/badge/License-Apache%202.0-green)](LICENSE.md)
+[![Downloads](https://static.pepy.tech/badge/cmind)](https://pepy.tech/project/cmind)
 
-[![Downloads](https://pepy.tech/badge/ck)](https://pepy.tech/project/ck)
-[![PyPI version](https://badge.fury.io/py/ck.svg)](https://badge.fury.io/py/ck)
-[![Python Version](https://img.shields.io/badge/python-2.7%20|%203.4+-blue.svg)](https://pypi.org/project/ck)
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![arXiv](https://img.shields.io/badge/arXiv-2406.16791-b31b1b.svg)](https://arxiv.org/abs/2406.16791)
+[![CM test](https://github.com/mlcommons/ck/actions/workflows/test-cm.yml/badge.svg)](https://github.com/mlcommons/ck/actions/workflows/test-cm.yml)
+[![CM script automation features test](https://github.com/mlcommons/ck/actions/workflows/test-cm-script-features.yml/badge.svg)](https://github.com/mlcommons/ck/actions/workflows/test-cm-script-features.yml)
 
-Linux/MacOS: [![Build Status](https://travis-ci.org/ctuning/ck.svg?branch=master)](https://travis-ci.org/ctuning/ck)
-Windows: [![Windows Build status](https://ci.appveyor.com/api/projects/status/iw2k4eajy54xrvqc?svg=true)](https://ci.appveyor.com/project/gfursin/ck)
-Coverage: [![Coverage Status](https://coveralls.io/repos/github/ctuning/ck/badge.svg)](https://coveralls.io/github/ctuning/ck)
+### About
 
+Collective Knowledge (CK) in a community project to develop open-source tools, platforms and automation recipes 
+that can help researchers and engineers automate their repetitive, tedious and time-consuming tasks
+to build, run, benchmark and optimize AI, ML and other applications and systems 
+across diverse and continuously changing models, data, software and hardware.
 
+CK consists of several ongoing sub-projects:
 
-## Introduction
+* [Collective Mind framework (CM)](cm) (*~1MB*) - a very light-weight Python-based framework with minimal dependencies
+  to help users implement, share and reuse cross-platform automation recipes to 
+  build, benchmark and optimize applications on any platform
+  with any software and hardware. CM attempts to extends the `cmake` concept 
+  with reusable automation recipes and workflows written in plain Python or native OS scripts,
+  accessible via a human readable interface with simple tags,
+  and shareable in public and private repositories in a decentralized way.
+  Furthermore, in comparison with cmake, these automation recipes can not only detect missing code 
+  but also download artifacts (models, data sets), preprocess them, build missing 
+  dependencies, install them and run the final code on diverse platforms in a unified and automated way.
+  You can learn more about the CM concept from this [white paper](https://arxiv.org/abs/2406.16791) 
+  and the [ACM REP'23 keynote](https://doi.org/10.5281/zenodo.8105339).
 
-We have developed the Collective Knowledge framework (CK) to help researchers 
-share their projects and artifacts (code, data, models, scripts, experiments, papers)
-in a common format as a human-readable database with a standardized API, CLI and JSON input/output/meta descriptions
 
-CK is a small, cross-platform, CLI-based and community-driven Python framework 
-to add, share and reuse [automation actions](https://codereef.ai/portal/c/cr-action) 
-for repetitive, tedious, and time-consuming R&D tasks in a non-intrusive way
-along with existing research projects.
+  * [CM4MLOPS: CM automation recipes for MLOps, MLPerf and DevOps](https://github.com/mlcommons/cm4mlops) (*~6MB*) - 
+    a collection of portable, extensible and technology-agnostic automation recipes
+    with a human-friendly interface (aka CM scripts) to unify and automate all the manual steps required to compose, run, benchmark and optimize complex ML/AI applications 
+    on diverse platforms with any software and hardware: see [online cKnowledge catalog](https://access.cknowledge.org/playground/?action=scripts),
+    [online MLCommons catalog](https://docs.mlcommons.org/cm4mlops/scripts) 
+    and [source code](https://github.com/mlcommons/cm4mlops/blob/master/script).
 
-CK also helps to convert all ad-hoc artfiacts into standardized and reusable CK components 
-with a common API and JSON meta description.
-For example, CK features 
-[software detection plugins](https://codereef.ai/portal/c/soft) (CK "soft" component), 
-[meta packages](https://codereef.ai/portal/c/package) (CK "package" component) 
-and [OS descriptions](https://codereef.ai/portal/c/os)
-to automate the detection and installation of all the dependencies 
-required by a given research project to run on any target platform.
+  * [CM automation recipes to reproduce research projects](https://github.com/ctuning/cm4research) (*~1MB*) - a unified CM interface to help researchers
+    and engineers access, prepare and run diverse research projects and make it easier to validate them in the real world 
+    across rapidly evolving models, data, software and hardware
+    (see [our reproducibility initatives](https://cTuning.org/ae) 
+    and [motivation](https://www.youtube.com/watch?v=7zpeIVwICa4) behind this project).
 
-Such CK actions and components can be connected into platform-agnostic, 
-portable, customizable, reusable and reproducible [workflows](https://CodeReef.ai/portal/c/program) 
-(CK "program" component) that can be easily integrated with Continuous Integration tools, 
-existing/legacy projects, and production systems.
+  * [CM automation recipes for ABTF](https://github.com/mlcommons/cm4abtf) (*~1MB*) - a unified CM interface and automation recipes
+    to run automotive benchmark across different models, data sets, software and hardware from different vendors.
 
-The stable components are published at the [open CodeReef platform](https://CodeReef.ai/static/docs)
-similar to PyPI along with auto-generated "live" papers and portable workflows 
-to help the community participate in [collaborative validation of research results](https://CodeReef.ai/portal/c/result) 
-across diverse hardware, datasets and models similar to SETI@home.
+  * [Modular C++ harness for MLPerf loadgen](https://github.com/mlcommons/cm4mlops/tree/main/script/app-mlperf-inference-mlcommons-cpp)
 
-Our long-term goal is to enable collaborative, reproducible, sustainable and production-ready research 
-based on DevOps principles.
+  * [Modular Python harness for MLPerf loadgen](https://github.com/mlcommons/cm4mlops/tree/main/script/app-loadgen-generic-python)
 
-Learn more about our long-term vision in the following white papers and presentations: 
-[MLOps@MLSys'20]( https://arxiv.org/abs/2001.07935 ),
-[FOSDEM'19](https://doi.org/10.5281/zenodo.2556147),
-[CNRS'17](https://www.slideshare.net/GrigoriFursin/enabling-open-and-reproducible-computer-systems-research-the-good-the-bad-and-the-ugly),
-[DATE'16](https://www.researchgate.net/publication/304010295_Collective_Knowledge_Towards_RD_Sustainability),
-[CTI'09](https://hal.inria.fr/inria-00436029v2).
+* [Collective Knowledge Playground](https://access.cKnowledge.org) - an external platform being developed by [cKnowledge](https://cKnowledge.org)
+  to list CM scripts similar to PYPI, aggregate AI/ML Systems benchmarking results in a reproducible format with CM workflows, 
+  and organize [public optimization challenges and reproducibility initiatives](https://access.cknowledge.org/playground/?action=challenges) 
+  to find the most performance and cost-effective AI/ML Systems.
 
+  * [GUI to run modular benchmarks](https://access.cknowledge.org/playground/?action=howtorun) - such benchmarks 
+    are composed from [CM scripts](https://access.cknowledge.org/playground/?action=scripts)
+    and can run via a unified CM interface.
 
-## Important features
+  * [MLCommons docs to run MLPerf inference benchmarks from command line via CM](https://docs.mlcommons.org/inference)
 
-* CK actions can be shared and reused across research projects:
-  see the [list of available actions and modules](https://codereef.ai/portal/c/module).
+### Incubator
 
-* Standardized CK APIs and meta-descriptions help  users 
-  to easily connect actions into automated, portable and customizable workflows, 
-  and quickly integrate them with practically all major tools, frameworks and Continuous Integration Services: 
-  see the [list of shared repositories with CK workflows and actions](https://dev.codereef.ai/portal/c/cr-repo).
+We are preparing new projects based on user feedback:
+* [The next generation of CM](_incubator/cm-next-gen) *(prototyping stage)*
+* [The crowd-testing infrastructure for CM4MLOps and CM4MLPerf](_incubator/cm4mlops-testing) *(brainstorming stage)*
 
-* CK helps to automate [Artifact Evaluation](https://cTuning.org/ae), 
-  perform [reproducible experiments](https://codereef.ai/portal/c/cr-result) 
-  and generate papers with reusable research components:
-  see [the list of articles with CK workflows](https://codereef.ai/portal/search/?q=%22reproduced-papers%22) 
-  and the [CK-based interactive report with the Raspberry Pi foundation](https://codereef.ai/portal/c/report/rpi3-crowd-tuning-2017-interactive).
 
-* CK is used in reproducible optimization competitions to co-design efficient software and hardware
-  for emerging AI, ML and quantum computing workloads in terms of speed, accuracy, energy, and costs: 
-  see the [live CK dashboard with results from different Hackathons, tournaments and crowd-tuning campaigns](https://dev.codereef.ai/portal/search/?q=%22codereef-result%22).
+### License
 
+[Apache 2.0](LICENSE.md)
 
+### Documentation
 
-## CK-based projects
+**MLCommons is updating the CM documentation based on user feedback - please check stay tuned for more details**.
 
-* [cKnowledge.org](https://cKnowledge.org) and the [open CodeReef portal](https://CodeReef.ai/static/docs).
-* Research projects in the CK format from [our partners](https://cKnowledge.org/partners.html).
-* [Research papers from ML and systems conferences](https://codereef.ai/portal/search/?q=%22reproduced-papers%22%20AND%20%22portable-workflow-ck%22) shared with artifacts and workflows in the CK format.
-* [MLPerf benchmark automation demo](https://CodeReef.ai/demo).
-* [GitHub repositories in the CK format](https://CodeReef.ai/portal/c/cr-repo).
-* [R&D automation actions](https://CodeReef.ai/portal/c/cr-action).
-* [Software detection plugins](https://CodeReef.ai/portal/c/soft).
-* [Meta-packages](https://CodeReef.ai/portal/c/package).
-* [Artifact abstractions (CK Python modules for CK components)](https://CodeReef.ai/portal/c/module).
+* [CM Getting Started Guide and FAQ](docs/getting-started.md)
+  * [Common CM interface to run MLPerf inference benchmarks](docs/mlperf/inference)
+  * [Common CM interface to re-run experiments from ML and Systems papers including MICRO'23 and the Student Cluster Competition @ SuperComputing'23](docs/tutorials/common-interface-to-reproduce-research-projects.md)
+  * [CM automation recipes for MLOps and DevOps](https://access.cknowledge.org/playground/?action=scripts)
+  * [Other CM tutorials](docs/tutorials)
+* [Full documentation](docs/README.md)
+* [CM development tasks](docs/taskforce.md#current-tasks)
+* [CM and CK history](docs/history.md)
 
 
+### Citing CM
 
+If you found CM useful, please cite this article: 
+[ [ArXiv](https://arxiv.org/abs/2406.16791) ], [ [BibTex](https://github.com/mlcommons/ck/blob/master/citation.bib) ].
 
-## Documentation
+You can learn more about the motivation behind these projects from the following articles and presentations:
 
-*We plan a major revision of the CK documentation in 2020 based on user-feedback*
+* "Enabling more efficient and cost-effective AI/ML systems with Collective Mind, virtualized MLOps, MLPerf, Collective Knowledge Playground and reproducible optimization tournaments": [ [ArXiv](https://arxiv.org/abs/2406.16791) ] 
+* ACM REP'23 keynote about the MLCommons CM automation framework: [ [slides](https://doi.org/10.5281/zenodo.8105339) ] 
+* ACM TechTalk'21 about automating research projects: [ [YouTube](https://www.youtube.com/watch?v=7zpeIVwICa4) ] [ [slides](https://learning.acm.org/binaries/content/assets/leaning-center/webinar-slides/2021/grigorifursin_techtalk_slides.pdf) ]
 
-* [CK wiki](https://github.com/ctuning/ck/wiki) - we plan to rewrite it in the Sphinx format 
-* [CK basics](https://michel.steuwer.info/About-CK)
-* [CK Getting Started Guide](https://github.com/ctuning/ck/wiki/First-steps)
+### Acknowledgments
 
-
-
-
-
-## Installation
-
-You can install the Collective Knowledge framework on most platforms using PIP as follows:
-
-```
-pip install ck
-```
-
-You can also install CK using a specific Python version (for example, Python 3.6 or for Python 2.7):
-```
-python3.6 -m pip install ck
-```
-or
-```
-python2.7 -m pip install ck
-```
-
-*You may need to add flag "--user" to install the client in your user space:*
-```
-pip install ck --user
-python3.6 -m pip install ck --user
-```
-
-You should now be able to run CK using one of the following alternative commands:
-```
-ck
-
-python3.6 -m ck
-```
-
-If the installation is successful, you will see some internal information 
-about the CK installation and a Python version used:
-
-```
-CK version: 1.12.1
-
-Python executable used by CK: /usr/bin/python
-
-Python version used by CK: 2.7.12 (default, Oct  8 2019, 14:14:10)
-   [GCC 5.4.0 20160609]
-
-Path to the default repo: /home/fursin/fggwork/ck/ck/repo
-Path to the local repo:   /home/fursin/CK/local
-Path to CK repositories:  /home/fursin/CK
-
-Documentation:        https://github.com/ctuning/ck/wiki
-CK Google group:      https://bit.ly/ck-google-group
-CK Slack channel:     https://cKnowledge.org/join-slack
-Stable CK components: https://CodeReef.ai/portal
-```
-
-### Prerequisites
-
-The CK framework requires minimal dependencies: Python 2.7+ or 3.x, PIP and Git. 
-
-CK supports the following platforms:
-
-|               | As a host platform | As a target platform |
-|---------------|:------------------:|:--------------------:|
-| Generic Linux | ✓ | ✓ |
-| Linux (Arm)   | ✓ | ✓ |
-| Raspberry Pi  | ✓ | ✓ |
-| MacOS         | ✓ | ✓ |
-| Windows       | ✓ | ✓ |
-| Android       | partially | ✓ |
-| iOS           | TBD | TBD |
-
-### Linux
-
-You need to have the following packages installed (Ubuntu example):
-
-```
-sudo apt-get install python3 python3-pip git wget
-```
-
-### MacOS
-
-```
-brew install python3 python3-pip git wget
-```
-
-### Windows
-
-* Download and install Git from [git-for-windows.github.io](https://git-for-windows.github.io).
-* Download and install any Python from [www.python.org/downloads/windows](https://www.python.org/downloads/windows).
-
-### Android (Linux host)
-
-These dependencies are needed to cross-compile for Android (tested on Ubuntu 18.04 including Docker and Windows 10 Subsystem for Linux). 
-
-```
- sudo apt update
- sudo apt install git wget libz-dev curl cmake
- sudo apt install gcc g++ autoconf autogen libtool
- sudo apt install android-sdk
- sudo apt install google-android-ndk-installer
-```
-
-### Docker
-
-We prepared several Docker images with the CK framework and AI/ML CK workflows 
-at the [cTuning Docker hub](https://hub.docker.com/u/ctuning).
-Select the most relevant image and run it as follows:
-```
-docker run -p 3344:3344 -it {Docker image name from the above list} /bin/bash
-```
-
-
-
-
-
-
-## Next steps
-
-Based on user feedback we plan the following activities:
-
-* Standardization of CK actions, APIs and meta descriptions
-* Better documentation
-* GUI to create, test and interconnect CK actions
-* GUI to assemble portable workflows
-* GUI to automate [MLPerf](https://mlperf.org) submissions
-
-
-<img src="https://cTuning.org/_resources/ctuning-activities-resize.png" width="687">
-
-
-
-
-## Get involved
-
-Please follow this [guide](https://github.com/ctuning/ck/wiki) to add your workflows and components. Note that we plan to rewrite it and add tutorials as soon as we have more resources!
-
-Provide your suggestions using our [public mailing list](https://groups.google.com/forum/#!forum/collective-knowledge) 
-and the [Slack channel](https://cKnowledge.org/join-slack)!
-
-Help the community to improve the existing CK components (actions, modules, packages, software plugins, workflows),
-when they fail on new platforms or miss some functionality, share the new ones and fix buges - you can provide 
-your feedback and report bugs in the respective [CK development repositories](https://codereef.ai/portal/c/cr-repo) 
-or using [the CodeReef platform](https://CodeReef.ai/portal)!
-
-Consider sponsoring the [cTuning foundation](https://cTuning.org) to support our community activities.
-
-Contact [Grigori Fursin](mailto:grigori.fursin@ctuning.org) (the CK author) about our long-term vision and development plans.
+Collective Knowledge (CK) and Collective Mind (CM) were created by [Grigori Fursin](https://cKnowledge.org/gfursin),
+sponsored by cKnowledge.org and cTuning.org, and donated to MLCommons to benefit everyone. 
+Since then, this open-source technology (CM, CM4MLOps, CM4MLPerf, CM4ABTF, CM4Research, etc)
+is being developed as a community effort thanks to all our
+[volunteers, collaborators and contributors](https://github.com/mlcommons/ck/blob/master/CONTRIBUTING.md)! 

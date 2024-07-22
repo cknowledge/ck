@@ -1,0 +1,13 @@
+alias: mlcommons@ck
+uid: a4705959af8e447a
+
+git: true
+
+prefix: cm-mlops
+
+version: 2.3.2
+
+deps:
+  - alias: mlcommons@cm4mlops
+    uid: 9e97bb72b0474657
+    conflict: True

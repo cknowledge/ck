@@ -1,0 +1,5 @@
+cmind>=2.0.1
+pyyaml
+requests
+setuptools
+giturlparse
